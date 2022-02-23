@@ -1,14 +1,11 @@
-package com.greatlearning.nodeclass;
+package greatlearning.nodeclass;
 
 public class Node {
-	public int val;
+	public int value;
 	public Node left, right;
-	
-	Node(int item)
-	{
-		val = item;
-		left = right = null;
-		
-	}
 
+	public Node(int value) {
+		this.value = value;
+		this.left = this.right = null;
+	}
 }
