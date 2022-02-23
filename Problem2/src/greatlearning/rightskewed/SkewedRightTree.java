@@ -1,67 +1,42 @@
-package com.greatlearning.rightskewed;
-import com.greatlearning.nodeclass.Node;
+package greatlearning.rightskewed;
+import greatlearning.nodeclass.Node;
 
 
 public class SkewedRightTree
 {
-	
-	//Node tree = new Node();
-	public static Node node;
-    public Node prevNode = null;
-    public Node headNode = null;
-	public void flattenSkewedTree(Node root, int order)
-	{
-		// Base Case
-		if(root == null)
-		{
+	public static Node node, prevNode = null, headNode = null;
+
+	// to convert BST to Skewed Tree
+	public void convertBSTToSkewedTree(Node root) {
+		// check for null tree
+		if (root == null) {
 			return;
 		}
-		// Condition to check the order in which the skewed tree to maintained
-		if(order > 0)
-		{
-			flattenSkewedTree(root.right, order);
-		}
-		else
-		{
-			flattenSkewedTree(root.left, order);
-		}
+
+		// use recursion
+		convertBSTToSkewedTree(root.left);
 		Node rightNode = root.right;
-		Node leftNode = root.left;
-		// Condition to check if the root Node of the skewed tree is not defined
-		if(headNode == null)
-		{
-			headNode = root;
-			root.left = null;
-			prevNode = root;
-		}
-		else
-		{
-			prevNode.right = root;
-			root.left = null;
-			prevNode = root;
-		}
 
-		// Similarly recurse for the left / right subtree on the basis of the order required
-		if (order > 0)
-		{
-			flattenSkewedTree(leftNode, order);
+		if (headNode == null) {
+			headNode = root;
+		} else {
+			prevNode.right = root;
 		}
-		else
-		{
-			flattenSkewedTree(rightNode, order);
-		}
-		
+		root.left = null;
+		prevNode = root;
+
+		// do recursion with rightNode
+		convertBSTToSkewedTree(rightNode);
 	}
-	// Function to traverse the right skewed tree using recursion
-	public void traverseRightSkewed(Node root)
-	{
-		if(root == null)
-		{
+
+	// traverse the right skewed tree using recursion
+	public void traverseTree(Node root) {
+		if (root == null) {
 			return;
 		}
-		System.out.print(root.val + " ");
-		traverseRightSkewed(root.right);
+
+		System.out.print(root.value + " ");
+		traverseTree(root.right);
 	}
 
-	
 }
